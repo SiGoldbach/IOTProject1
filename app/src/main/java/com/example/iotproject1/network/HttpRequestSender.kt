@@ -5,7 +5,7 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
-fun sendHttpGetRequest(urlString: String): String {
+fun httpGetRequest(urlString: String): String {
     val url = URL(urlString)
     val urlConnection = url.openConnection() as HttpURLConnection
 

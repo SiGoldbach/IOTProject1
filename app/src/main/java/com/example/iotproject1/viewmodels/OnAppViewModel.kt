@@ -6,7 +6,7 @@ import com.example.iotproject1.model.PrimaryModel
 import com.example.iotproject1.model.TempAndHumidityResponse
 import com.example.iotproject1.model.ToiletVisit
 import com.example.iotproject1.model.changeToCorrectTime
-import com.example.iotproject1.network.sendHttpGetRequest
+import com.example.iotproject1.network.httpGetRequest
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +23,7 @@ class OnAppViewModel : ViewModel() {
     fun update() {
         viewModelScope.launch(Dispatchers.IO) {
             val response: String =
-                sendHttpGetRequest("https://api.thingspeak.com/channels/2087340/feeds.json?api_key=1Y3EW91KEJWE5GSG&results=1")
+                httpGetRequest("https://api.thingspeak.com/channels/2087340/feeds.json?api_key=1Y3EW91KEJWE5GSG&results=1")
             val gson = Gson()
             val tempAndHumidityResponse =
                 gson.fromJson(response, TempAndHumidityResponse::class.java)
@@ -38,7 +38,7 @@ class OnAppViewModel : ViewModel() {
         }
         viewModelScope.launch(Dispatchers.IO) {
             val response: String =
-                sendHttpGetRequest("https://api.thingspeak.com/channels/2114812/feeds.json?api_key=XZJGPKWX4KT1VT4H&results=20")
+                httpGetRequest("https://api.thingspeak.com/channels/2114812/feeds.json?api_key=XZJGPKWX4KT1VT4H&results=20")
             val gson = Gson()
             val toiletVisitsResponse = gson.fromJson(response, ToiletVisit::class.java)
             for (i in toiletVisitsResponse.feeds) {
